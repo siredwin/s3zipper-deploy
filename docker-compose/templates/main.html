@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>S3zipper SetUp</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="page-header text-center">
+    <h2>Welcome to S3zipper</h2>
+    <p>
+        S3 Zipping Server on EC2 <br>
+    </p>
+
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm-4">
+            <h3>WELCOME!</h3>
+            <p>
+                If you are seeing this page, congratulations! Your server is set up correctly. <br>
+                Please go through Part 1 & 2 to get everything else running smoothly.
+            </p>
+
+            <h4><strong>Visit S3zipper to get a managed version, or to get more information: </strong></h4>
+            <p>
+                Visit <a href="http://www.s3zipper.com">S3zipper</a> for more information. <br>
+            </p> <br>
+
+
+            <h4><strong>To check errors and logs: </strong></h4>
+            <p> To see any log errors, check below:</p>
+            <h5><strong>Ubuntu logs </strong></h5>
+            <pre><code> tail {{ ubuntuhome }}/logs/log.txt </code></pre><br>
+
+            <h4><strong>Check for docker image updates: </strong></h4>
+            <p> Visit port :3000 </p>
+            <h5><strong>Example: </strong></h5>
+            <pre><code> 0.0.0.0:3000 </code></pre>
+
+        </div>
+
+        <div class="col-sm-4">
+            <h3>PART 1 (API SERVER SETUP)</h3>
+            <p>
+                This server is pre-configured to use <strong> Caddy Web Server</strong> as a reverse proxy.<br>
+                This means that you can easily get automatic HTTPS by providing a valid domain name.You can also use it as is with a public ip address. <br>
+                These changes can be achieved through the (Caddyfile & dockerconfig.env) files. <br>
+
+                <b>NB</b>: You need to provide a valid <i>PROXY_SERVER_NAME</i> in <i>dockerconfig.env</i></i> for urls to be generated properly. This value can be your public ip address or a domain name. Restart when done. <br> 
+                All settings for the main internal server can be accessed and edited from one  <strong><mark> config.toml </mark></strong> file. <b>(not recomended.)</b> <br>
+                More information on forum <a href="https://forum.s3zipper.com/t/s3zipper-server-setup/37">here</a> <br>
+            </p> <br>
+
+            <h4>Step 1 (Directory) </h4>
+             <h5><strong>Change Directory to home</strong></h5>
+            <pre><code> cd {{ ubuntuhome }} </code></pre>
+            
+            <h5><strong> Internal Server Config path </strong></h5>
+            <pre><code> {{ ubuntuhome }}/config.toml </code></pre>
+
+            <h5><strong> Caddyfile </strong></h5>
+            <pre><code> {{ ubuntuhome }}/Caddyfile </code></pre>
+
+            <h5><strong>Environment Variables</strong></h5>
+            <pre><code> {{ ubuntuhome }}/dockerconfig.env </code></pre>
+
+            <h5><strong> Docker Compose </strong></h5>
+            <pre><code> {{ ubuntuhome }}/docker-compose.yml </code></pre> <br>
+
+            <h4>Step 2 <b>(Email Notification Setup)</b></h4>
+            <p>
+                To get email notifications, please provide email configuration settings in <strong>config.toml</strong>.
+            </p>
+
+            <p>
+                <b>NOTE:</b><br>
+                *Leave email field empty if you do not need notifications.<br>
+                *You must provide correct email configurations to be able to use email, or else, an error
+                will be triggered if you provide email with wrong configurations.<br>
+            </p>
+
+
+        </div>
+
+        <div class="col-sm-4">
+            <h3>PART 2 (API & Usage)</h3>
+            <p>For API documentation and usage: <br>
+                <a href="https://docs.s3zipper.com/#bd260c71-5f11-4a05-a07b-6e489ca8cb7d">Visit EC2(AMI) API documentation</a>
+            </p>
+            <p>
+                Available language examples in postman: <br>
+                <b>cURL, jQuery, Ruby, Python Requests, Node, PHP, & Go(Golang).</b>
+            </p>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
