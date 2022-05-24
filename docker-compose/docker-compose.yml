@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  caddyserver:
+    image: caddy:2.2.0-alpine
+    container_name: caddyserver
+    hostname: caddyserver
+    restart: always
+    network_mode: "host"
+    env_file:
+      - ./dockerconfig.env
+    volumes:
+      - "./caddy_secrets/data_lets_encrypt_storage:/data"
+      - "./caddy_secrets/config_storage:/config"
+      - "./Caddyfile:/etc/caddy/Caddyfile"
+
+  mongo:
+    image: mongo:4.4.1
+    command: mongod --dbpath /data/db
+    restart: always
+    volumes:
+      - ./data/mongodb:/data/db
+    expose:
+      - "27017"
+
+  awszipperv2:
+    image: elgonlabs/awszipperv2:2.1.0
+    restart: always
+    depends_on:
+      - 'mongo'
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./dockerconfig.env
+    volumes:
+      - "./dockerconfig.env:/go/dockerconfig.env"
+      - "./config.toml:/go/config.toml"
+      - "./logs:/go/logs"
+      - "./templates:/go/templates"   
+ 

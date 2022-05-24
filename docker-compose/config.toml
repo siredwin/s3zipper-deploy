@@ -1,0 +1,85 @@
+# filename: config.toml
+# All changes are applied automatically, but a restart is required for docker.
+# Contact admin@s3zipper.com for any questions or problems.
+# Only change the settings you are sure about. The default settings should work mostly.
+########################################################################################################################
+
+#Server configuration
+[zipserverconfig]
+HOST               = "localhost:8000"   # can be domain name or IP i.e. "mysite.com",local IP i.e. "127.0.0.1:8000", or public IP address.
+HOST_PORT          = ":8000"            # can be local ports or public port ":80" # don't forget leading colon
+#Show error information.
+DEBUG              = "true"             # can be used to enable/disable debug mode. Debug mode sets the log level to DEBUG
+# For HTTPS connections
+# Leave all fields empty if you don't intend to use HTTPS
+HOST_SECURE_PORT   = ""                 # can be HTTPS port i.e. ":443" , or local i.e ":8443", or empty "" if you don't need HTTPS
+CERT_FILE          = ""                 # Absolute path to certificate file
+KEY_FILE           = ""                 # Absolute path to key file
+########################################################################################################################
+
+#All configurations for connections to s3
+# Use these settings if you need them hardwired or
+# leave empty and enter using form during post request.
+# Hardwired settings have preference over settings from post request.
+[awsconfig]
+#awsKey         = ""                        # Aws Key
+#awsSecret      = ""    # Aws Secret
+#awsBucket      = ""                                  # Aws Bucket
+awsKey         = ""                        # Aws Key
+awsSecret      =  ""    # Aws Secret
+awsBucket      = ""                                  # Aws Bucket
+awsRegion      =  ""                                   # Aws Region
+awsToken       =  ""                                           # Aws Token
+awsEndpoint    =  ""                                            # Aws Endpoint
+########################################################################################################################
+
+# Configurations to enable sending emails
+# Leave empty if you don't want to use emails
+[emails]
+identity =  "" #Usually identity should be the empty string, to act as username.
+username = "" #email username
+password = "" #password
+host = "smtp.zoho.com" # Email host name
+port = "587"
+address = "smtp.zoho.com:587" # must be host name and port combined
+# Add "fromemail" if different from "username"
+#Leave empty to default to username
+# Most email providers will only allow email name aliases.
+fromemail = "" #should be same as username, or alias of email username if provided.
+########################################################################################################################
+
+# Secure website with Key Authorization
+# All post requests will require a
+# HTTP Authorization request header
+[keyauthorization]
+usewebkey = "false"    # default is "false" # if "true", you need to provide unique key(webkey)
+webkey = "my_unique_website_key"  # your unique key(webkey)
+########################################################################################################################
+
+# Configurations for all templates
+# All templates are inside "templates" directory
+[templateconfig]
+ubuntuhome = "/home/ubuntu/go"
+debianhome = "/home/debian/go"
+basedir = "templates/"
+emailtemplate = "emails/email.html"  # template for sending email , You can edit the this template
+homepage = "main.html"  # Text shown on home page.
+########################################################################################################################
+
+# Configurations for your mongo connection string
+# Use default values if possible
+#[mongoconfig]
+#connectionstring  = "mongodb://localhost:27017/zipperresults"
+[dbconfig]
+    [dbconfig.postgres]
+    connectionString = ""
+
+    [dbconfig.mongo]
+    tokenMongo = "mongodb://mongo:27017/zipperresults"
+########################################################################################################################
+
+# JSON Web Tokens configurations for secret
+# Use a unique string combination
+[jwtconfig]
+jwtSecret = "very_secretive_information"
+########################################################################################################################

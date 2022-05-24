@@ -1,0 +1,26 @@
+{
+    #auto_https off
+    #auto_https disable_redirects
+    #email   email@email.com # For letsencrypt certificates
+}
+
+
+# REVERSE PROXY
+# Values from dockerconfig.env
+# Change PROXY_HTTPS to true if you have a domain name for auto-HTTPS to work.
+
+# Please update PROXY_SERVER_NAME variable with any of these values in dockerconfig.env
+
+#domain.com, www.domain.com { 
+http://{$PROXY_SERVER_NAME} {
+    reverse_proxy {$INTERNAL_SERVER_NAME} {
+        header_up Host {$MAIN_UPSTREAM_HOST}
+    }
+}
+
+
+#check for any docker image updates
+# check port :3000
+
+
+
