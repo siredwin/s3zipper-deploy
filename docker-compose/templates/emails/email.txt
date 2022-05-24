@@ -1,8 +1,0 @@
- This is an important message containing your results.
- Below is the link to your results:
- 
- {{ file }}
- 
- Regards,
- Admin S3zipper
- Message from s3zipper.
